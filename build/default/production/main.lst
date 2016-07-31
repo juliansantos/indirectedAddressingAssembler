@@ -1,4 +1,4 @@
-MPASM 5.68                          MAIN.ASM   7-30-2016  20:04:12         PAGE  1
+MPASM 5.68                          MAIN.ASM   7-31-2016  8:36:40         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -7,7 +7,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00001 ;//rcall -> Para que sirve  
                       00002 ;//DAW -> Para que sirve
                       00003 ;    // que es instruction overhead
-                      00004 #include <P18F2550.INC>
+                      00004     #include <P18F2550.INC>
                       00001         LIST
                       00002 
                       00003 ;==========================================================================
@@ -20,35 +20,33 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       01578         LIST
                       00005     list p=PIC18F2550
                       00006     
-                      00007 #define sa1l 0x61
-                      00008 #define sa1h 0x00
-                      00009   
-                      00010     CBLOCK 0x60
-  00000060            00011     sa1, sa2, sa3
-                      00012     ENDC
-                      00013     
-                      00014     org 0
-000000                00015 main:
-000000 0E05           00016  movlw 0x05
-000002 6F60           00017  movwf sa1 
-000004 0E05           00018  movlw 0x05
-000006 6F61           00019  movwf sa2
-000008 0E05           00020  movlw 0x05
-00000A 6F62           00021  movwf sa3 
-00000C 0E01           00022  movlw 0x01
-00000E 6EE1           00023  movwf FSR1L
-000010 0E01           00024  movlw 0x01
-000012 6EE2           00025  movwf FSR1H
-000014 0E89           00026  movlw 0x89
-000016 6EE7           00027  movwf INDF1
-000018 0E00           00028  movlw 0x00
-00001A 5160           00029  movf sa1,W
-00001C 5161           00030  movf sa2,W
-00001E 5162           00031  movf sa3,W
-000020 D???           00032  bra main
-                      00033     
-                      00034     END 
-MPASM 5.68                          MAIN.ASM   7-30-2016  20:04:12         PAGE  2
+                      00007     #define sa1l 0x60
+                      00008     #define sa1h 0x00
+                      00009     #define sad 0x0060 
+                      00010   
+                      00011     CBLOCK 0x60
+  00000060            00012     sa1, sa2, sa3
+                      00013     ENDC
+                      00014     
+                      00015     org 0x0
+000000                00016 main:
+000000 0E05           00017  movlw 0x05
+000002 6F60           00018  movwf sa1 
+000004 0E04           00019  movlw 0x04
+000006 6F61           00020  movwf sa2
+000008 0E03           00021  movlw 0x03
+00000A 6F62           00022  movwf sa3 
+00000C EE10 F060      00023  lfsr 1,sad   ;Load in FSR1 sad [0060h]
+000010 0E89           00024  movlw 0x89
+000012 6EE7           00025  movwf INDF1  ;Load in FSR* 89h         
+000014 0E00           00026  movlw 0x00
+000016 5160           00027  movf sa1,W
+000018 5161           00028  movf sa2,W
+00001A 5162           00029  movf sa3,W
+00001C D???           00030  bra main
+                      00031     
+                      00032     END 
+MPASM 5.68                          MAIN.ASM   7-31-2016  8:36:40         PAGE  2
 
 
 SYMBOL TABLE
@@ -107,7 +105,7 @@ BRG16                             00000003
 BRGH                              00000002
 BSR                               00000FE0
 BTOEE                             00000004
-MPASM 5.68                          MAIN.ASM   7-30-2016  20:04:12         PAGE  3
+MPASM 5.68                          MAIN.ASM   7-31-2016  8:36:40         PAGE  3
 
 
 SYMBOL TABLE
@@ -166,7 +164,7 @@ CRC16EE                           00000002
 CRC16EF                           00000002
 CRC5EE                            00000001
 CRC5EF                            00000001
-MPASM 5.68                          MAIN.ASM   7-30-2016  20:04:12         PAGE  4
+MPASM 5.68                          MAIN.ASM   7-31-2016  8:36:40         PAGE  4
 
 
 SYMBOL TABLE
@@ -225,7 +223,7 @@ EPHSHK                            00000004
 EPINEN                            00000001
 EPOUTEN                           00000002
 EPSTALL                           00000000
-MPASM 5.68                          MAIN.ASM   7-30-2016  20:04:12         PAGE  5
+MPASM 5.68                          MAIN.ASM   7-31-2016  8:36:40         PAGE  5
 
 
 SYMBOL TABLE
@@ -284,7 +282,7 @@ IDLEN                             00000007
 INDF0                             00000FEF
 INDF1                             00000FE7
 INDF2                             00000FDF
-MPASM 5.68                          MAIN.ASM   7-30-2016  20:04:12         PAGE  6
+MPASM 5.68                          MAIN.ASM   7-31-2016  8:36:40         PAGE  6
 
 
 SYMBOL TABLE
@@ -343,7 +341,7 @@ LATB5                             00000005
 LATB6                             00000006
 LATB7                             00000007
 LATC                              00000F8B
-MPASM 5.68                          MAIN.ASM   7-30-2016  20:04:12         PAGE  7
+MPASM 5.68                          MAIN.ASM   7-31-2016  8:36:40         PAGE  7
 
 
 SYMBOL TABLE
@@ -402,7 +400,7 @@ PCFG3                             00000003
 PCL                               00000FF9
 PCLATH                            00000FFA
 PCLATU                            00000FFB
-MPASM 5.68                          MAIN.ASM   7-30-2016  20:04:12         PAGE  8
+MPASM 5.68                          MAIN.ASM   7-31-2016  8:36:40         PAGE  8
 
 
 SYMBOL TABLE
@@ -461,7 +459,7 @@ RA5                               00000005
 RA6                               00000006
 RB0                               00000000
 RB1                               00000001
-MPASM 5.68                          MAIN.ASM   7-30-2016  20:04:12         PAGE  9
+MPASM 5.68                          MAIN.ASM   7-31-2016  8:36:40         PAGE  9
 
 
 SYMBOL TABLE
@@ -520,7 +518,7 @@ SOFIF                             00000006
 SPBRG                             00000FAF
 SPBRGH                            00000FB0
 SPEN                              00000007
-MPASM 5.68                          MAIN.ASM   7-30-2016  20:04:12         PAGE 10
+MPASM 5.68                          MAIN.ASM   7-31-2016  8:36:40         PAGE 10
 
 
 SYMBOL TABLE
@@ -579,7 +577,7 @@ T1RUN                             00000006
 T1SYNC                            00000002
 T2CKPS0                           00000000
 T2CKPS1                           00000001
-MPASM 5.68                          MAIN.ASM   7-30-2016  20:04:12         PAGE 11
+MPASM 5.68                          MAIN.ASM   7-31-2016  8:36:40         PAGE 11
 
 
 SYMBOL TABLE
@@ -638,7 +636,7 @@ TOSU                              00000FFF
 TOUTPS0                           00000003
 TOUTPS1                           00000004
 TOUTPS2                           00000005
-MPASM 5.68                          MAIN.ASM   7-30-2016  20:04:12         PAGE 12
+MPASM 5.68                          MAIN.ASM   7-31-2016  8:36:40         PAGE 12
 
 
 SYMBOL TABLE
@@ -697,7 +695,7 @@ UEP1                              00000F71
 UEP10                             00000F7A
 UEP11                             00000F7B
 UEP12                             00000F7C
-MPASM 5.68                          MAIN.ASM   7-30-2016  20:04:12         PAGE 13
+MPASM 5.68                          MAIN.ASM   7-31-2016  8:36:40         PAGE 13
 
 
 SYMBOL TABLE
@@ -756,7 +754,7 @@ _BOR_ON_ACTIVE_2L                 000000FD
 _BOR_SOFT_2L                      000000FB
 _CCP2MX_OFF_3H                    000000FE
 _CCP2MX_ON_3H                     000000FF
-MPASM 5.68                          MAIN.ASM   7-30-2016  20:04:12         PAGE 14
+MPASM 5.68                          MAIN.ASM   7-31-2016  8:36:40         PAGE 14
 
 
 SYMBOL TABLE
@@ -815,7 +813,7 @@ _FOSC_HS_1H                       000000FC
 _FOSC_INTOSCIO_EC_1H              000000F8
 _FOSC_INTOSC_EC_1H                000000F9
 _FOSC_INTOSC_HS_1H                000000FB
-MPASM 5.68                          MAIN.ASM   7-30-2016  20:04:12         PAGE 15
+MPASM 5.68                          MAIN.ASM   7-31-2016  8:36:40         PAGE 15
 
 
 SYMBOL TABLE
@@ -874,7 +872,7 @@ _WDTPS_512_2H                     000000F3
 _WDTPS_64_2H                      000000ED
 _WDTPS_8192_2H                    000000FB
 _WDTPS_8_2H                       000000E7
-MPASM 5.68                          MAIN.ASM   7-30-2016  20:04:12         PAGE 16
+MPASM 5.68                          MAIN.ASM   7-31-2016  8:36:40         PAGE 16
 
 
 SYMBOL TABLE
@@ -902,9 +900,10 @@ __18F2550                         00000001
 main                              00000000
 sa1                               00000060
 sa1h                              0x00
-sa1l                              0x61
+sa1l                              0x60
 sa2                               00000061
 sa3                               00000062
+sad                               0x0060
 
 Errors   :     0
 Warnings :     0 reported,     0 suppressed
