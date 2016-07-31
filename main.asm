@@ -26,7 +26,9 @@ main:
  movlw 0x89
  movwf INDF1  ;Load in FSR* 89h => sa1=89	
  movlw 0x21
- movwf PREINC1 ;fsr1++ => sa2=21
+ movwf PREINC1 ;fsr1++ => sa2=21 {sa2=fsr1*}
+ movlw 0x1	
+ movwf PLUSW1 ; (fsr1+w)*=w {sa3=1}  //w=1 
  
  movf sa1,W
  movf sa2,W
