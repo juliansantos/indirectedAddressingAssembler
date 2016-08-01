@@ -13,8 +13,17 @@
     
     org 0x0
     
-main:
+     db 0x87,0x78,45,0  ;Declaring data bytes 
+     dw 0x1110	;Declare data words
+     da "1234",0 ;Declare Data ASCII, '0' unlike db represents a null value 
+     dt "abcd",0 ;Define table each caracter has an RETLW embeded / in PIC18 is
+		 ;recommend using tblrd and tblwt intructions
+  		 
+     de "ABCD"	 ;Declare EEPROM data byte - this is the same that org  0xF00000   	 
+     data "hello" ;Numeric and text data
+	 	 
      
+main:     
  movlw 0x05
  movwf sa1	    ;sa1=5
  movlw 0x04
